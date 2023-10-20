@@ -7,7 +7,7 @@ const EmployeeRoute=express.Router();
 
 EmployeeRoute.get('/',async (req,res)=>{
      try {
-        const data=await productModel.find({});
+        const data=await productModel.find(req.query);
         res.send(data);
      } catch (error) {
         console.log(error);
