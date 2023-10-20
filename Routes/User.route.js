@@ -45,7 +45,7 @@ UserRoute.post('/login',async (req,res)=>{
         
        }
        else{
-        res.send('Please signup first')
+        res.status(400).send("");
        }
     } catch (error) {
         console.log(error);
