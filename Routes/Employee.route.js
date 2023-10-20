@@ -5,7 +5,7 @@ const { Authenticate } = require('../Middlewares/Authentication');
 const productModel = require('../modals/Employee.model');
 const EmployeeRoute=express.Router();
 
-EmployeeRoute.get('/',Authenticate,async (req,res)=>{
+EmployeeRoute.get('/',async (req,res)=>{
      try {
         const data=await productModel.find({});
         res.send(data);
