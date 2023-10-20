@@ -7,18 +7,30 @@ const EmployeeRoute=express.Router();
 
 EmployeeRoute.get('/',async (req,res)=>{
      try {
-        const {page,limit,sort,order}=req.query;
+        const {page,limit,sort,order,category}=req.query;
         if(order){
             if(order=="asc"){
-                const data=await productModel.find().skip(page*limit-limit).limit(limit).sort({price:1});
-              return  res.send(data);
+                if(category){
+                    const data=await productModel.find({category}).skip(page*limit-limit).limit(limit).sort({price:1});
+                    return  res.send(data);
+                }
+                else{
+                    const data=await productModel.find().skip(page*limit-limit).limit(limit).sort({price:1});
+                    return  res.send(data);
+                }
             }
             else{
-                const data=await productModel.find().skip(page*limit-limit).limit(limit).sort({price:-1});
-              return  res.send(data);
+                if(category){
+                    const data=await productModel.find({category}).skip(page*limit-limit).limit(limit).sort({price:-1});
+                    return  res.send(data);
+                }
+                else{
+                    const data=await productModel.find().skip(page*limit-limit).limit(limit).sort({price:-1});
+                    return  res.send(data);
+                }
+                
             }
         }
-        
         
      } catch (error) {
         console.log(error);
