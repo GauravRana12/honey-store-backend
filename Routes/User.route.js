@@ -32,7 +32,7 @@ UserRoute.post('/login',async (req,res)=>{
        if(user){
         bcrypt.compare(password, user.password,async function(err, result) {
             if(err || !result){
-               return res.send("please signup first");
+               return res.status(400).send("");
             }
             else{
                 const userObj={
