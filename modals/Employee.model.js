@@ -8,5 +8,5 @@ const ProductSchema=mongoose.Schema({
     Rating:{type:Number,required:true}
 })
 
-const productModel=mongoose.model('/employee',ProductSchema);
+const productModel=mongoose.model('/product',ProductSchema);
 module.exports=productModel
