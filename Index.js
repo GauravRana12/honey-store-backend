@@ -16,7 +16,7 @@ app.get('/',(req,res)=>{
     res.send('Welcome');
 })
 app.use('/user',UserRoute);
-app.use('/products',EmployeeRoute);
+app.use('/product',EmployeeRoute);
 app.use('/cart',CartRoute)
 
 
