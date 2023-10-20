@@ -7,17 +7,15 @@ const UserRoute=express.Router();
 
 UserRoute.post('/signup',async (req,res)=>{
     try {
-        const {email,password,confirm_pass}=req.body;
-        if(password!=confirm_pass){
-            return res.send('Enter correct password');
-        }
+        const {name,email,phone,password}=req.body;
+        
         bcrypt.hash(password, 8,async function(err, hash) {
             // Store hash in your password DB.
             if(err){
                 return res.send('Please enter all details');
             }
             else{
-                await UserModel.create({email,password:hash,confirm_pass:hash});
+                await UserModel.create({name,email,phone,password:hash});
                 console.log(hash);
                 res.send('User registered successfully');
             }

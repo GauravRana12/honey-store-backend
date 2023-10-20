@@ -3,21 +3,30 @@ const bcrypt = require('bcrypt');
 const jwt=require('jsonwebtoken');
 const { Authenticate } = require('../Middlewares/Authentication');
 const productModel = require('../modals/Employee.model');
-const EmployeeRoute=express.Router();
+const UserModel = require('../modals/User.model');
 
-EmployeeRoute.get('/',Authenticate,async (req,res)=>{
+const CartRoute=express.Router();
+
+CartRoute.get('/',Authenticate,async (req,res)=>{
      try {
-        const data=await productModel.find({});
+        const id=req.userID;
+        const user=await UserModel.find({_id:id});
+        const data=await productModel.find({authorID:id});
         res.send(data);
      } catch (error) {
         console.log(error);
      }
 })
 
-EmployeeRoute.post('/',Authenticate,async (req,res)=>{
+CartRoute.post('/',Authenticate,async (req,res)=>{
       try {
         const input=req.body;
-        await productModel.create(input);
+        const id=req.userID;
+        const new_obj={
+            ...input,
+            authorID:id
+        }
+        await productModel.create(new_obj);
         res.send('Added successful');
       } catch (error) {
         console.log(error);
@@ -25,7 +34,7 @@ EmployeeRoute.post('/',Authenticate,async (req,res)=>{
 })
 
 
-EmployeeRoute.patch('/:emp_id',Authenticate,async (req,res)=>{
+CartRoute.patch('/:emp_id',Authenticate,async (req,res)=>{
     try {
         const {emp_id}=req.params.emp_id;
         const input=req.body;
@@ -36,7 +45,7 @@ EmployeeRoute.patch('/:emp_id',Authenticate,async (req,res)=>{
     }
 })
 
-EmployeeRoute.delete('/:emp_id',Authenticate,async (req,res)=>{
+CartRoute.delete('/:emp_id',Authenticate,async (req,res)=>{
     try {
         const {emp_id}=req.params.emp_id;
         await productModel.findByIdAndDelete(emp_id);
@@ -46,4 +55,4 @@ EmployeeRoute.delete('/:emp_id',Authenticate,async (req,res)=>{
     }
 })
 
-module.exports=EmployeeRoute;
+module.exports=CartRoute;
