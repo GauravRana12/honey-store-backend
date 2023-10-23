@@ -10,6 +10,7 @@ const CartRoute=express.Router();
 CartRoute.get('/',Authenticate,async (req,res)=>{
      try {
         const id=req.userID;
+        console.log(id)
         const user=await UserModel.find({_id:id});
         const data=await productModel.find({authorID:id});
         res.send(data);
