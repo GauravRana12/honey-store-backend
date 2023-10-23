@@ -40,7 +40,7 @@ CartRoute.post('/',Authenticate,async (req,res)=>{
 
 CartRoute.patch('/:emp_id',Authenticate,async (req,res)=>{
     try {
-        const {emp_id}=req.params.emp_id;
+        const {emp_id}=req.params;
         const input=req.body;
         await cartModel.findByIdAndUpdate(emp_id,input);
         res.send("Patches successful");
@@ -51,7 +51,7 @@ CartRoute.patch('/:emp_id',Authenticate,async (req,res)=>{
 
 CartRoute.delete('/:emp_id',Authenticate,async (req,res)=>{
     try {
-        const {emp_id}=req.params.emp_id;
+        const {emp_id}=req.params;
         await cartModel.findByIdAndDelete(emp_id);
         res.send('deleted successfully')
     } catch (error) {
