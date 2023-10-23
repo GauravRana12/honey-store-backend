@@ -5,7 +5,7 @@ const cartSchema=mongoose.Schema({
     image:{type:String,required:true},
     category:{type:String,required:true},
     price:{type:Number,required:true},
-    Rating:{type:Number,required:true},
+    rating:{type:Number,required:true},
     authorID:{type:String,required:true}
 })
 

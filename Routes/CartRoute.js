@@ -20,9 +20,12 @@ CartRoute.get('/',Authenticate,async (req,res)=>{
 })
 
 CartRoute.post('/',Authenticate,async (req,res)=>{
-      try {
-        const input=req.body;
+    const input=req.body;
         const id=req.userID;
+        console.log(input)
+        console.log(id)
+      try {
+        
         const new_obj={
             ...input,
             authorID:id
