@@ -39,7 +39,7 @@ EmployeeRoute.get('/',async (req,res)=>{
 
 EmployeeRoute.get('/:emp_id',async (req,res)=>{
     try {
-        const {emp_id}=req.params;
+        const {emp_id}=req.params.emp_id;
         const data=await productModel.find({_id:emp_id});
        return res.send(data);
     } catch (error) {
