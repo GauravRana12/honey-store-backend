@@ -25,6 +25,10 @@ UserRoute.post('/signup',async (req,res)=>{
     }
 })
 
+
+var obj={
+    message:"Invalid"
+}
 UserRoute.post('/login',async (req,res)=>{
     try {
         const {email,password}=req.body;
@@ -32,7 +36,8 @@ UserRoute.post('/login',async (req,res)=>{
        if(user){
         bcrypt.compare(password, user.password,async function(err, result) {
             if(err || !result){
-               return res.status(400).send("");
+                
+               return res.status(400).send(obj);
             }
             else{
                 const userObj={
@@ -45,7 +50,7 @@ UserRoute.post('/login',async (req,res)=>{
         
        }
        else{
-        res.status(400).send("");
+        res.status(400).send(obj);
        }
     } catch (error) {
         console.log(error);
