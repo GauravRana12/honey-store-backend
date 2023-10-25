@@ -23,9 +23,9 @@ EmployeeRoute.get('/',async (req,res)=>{
 
         if (sort) {
             if (order === 'asc') {
-                options.sort = { [sort]: 1 };
+                options.sort = { price: 1 };
             } else if (order === 'desc') {
-                options.sort = { [sort]: -1 };
+                options.sort = { price: -1 };
             }
         }
 
