@@ -21,12 +21,8 @@ EmployeeRoute.get('/',async (req,res)=>{
 
         const options = {};
 
-        if (sort) {
-            if (order === 'asc') {
-                options.sort = { price: 1 };
-            } else if (order === 'desc') {
-                options.sort = { price: -1 };
-            }
+        if (sort === 'price') {
+            options.sort = { price: order === 'asc' ? 1 : -1 };
         }
 
         if (page && limit) {
