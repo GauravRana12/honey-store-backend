@@ -7,30 +7,35 @@ const EmployeeRoute=express.Router();
 
 EmployeeRoute.get('/',async (req,res)=>{
      try {
-        const {page,limit,sort,order,category}=req.query;
-        if(order){
-            if(order=="asc"){
-                if(category){
-                    const data=await productModel.find({category}).skip(page*limit-limit).limit(limit).sort({price:1});
-                    return  res.send(data);
-                }
-                else{
-                    const data=await productModel.find().skip(page*limit-limit).limit(limit).sort({price:1});
-                    return  res.send(data);
-                }
-            }
-            else{
-                if(category){
-                    const data=await productModel.find({category}).skip(page*limit-limit).limit(limit).sort({price:-1});
-                    return  res.send(data);
-                }
-                else{
-                    const data=await productModel.find().skip(page*limit-limit).limit(limit).sort({price:-1});
-                    return  res.send(data);
-                }
-                
+        const { page, limit, sort, order, category, search } = req.query;
+        const query = {};
+
+        if (category) {
+            query.category = category;
+        }
+
+        // Add the search condition by title
+        if (search) {
+            query.title = new RegExp(search, 'i');
+        }
+
+        const options = {};
+
+        if (sort) {
+            if (order === 'asc') {
+                options.sort = { [sort]: 1 };
+            } else if (order === 'desc') {
+                options.sort = { [sort]: -1 };
             }
         }
+
+        if (page && limit) {
+            options.skip = (page - 1) * limit;
+            options.limit = parseInt(limit);
+        }
+
+        const data = await productModel.find(query, null, options);
+        res.send(data);
         
      } catch (error) {
         console.log(error);
