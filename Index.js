@@ -6,7 +6,7 @@ const connection=require('./config/db');
 const UserRoute = require('./Routes/User.route');
 const EmployeeRoute = require('./Routes/Employee.route');
 const CartRoute = require('./Routes/CartRoute');
-
+const passport=require('./config/google.oauth')
 const app=express();
 app.use(cors({
     origin : ["http://localhost:3000"]
@@ -18,7 +18,28 @@ app.get('/',(req,res)=>{
 app.use('/user',UserRoute);
 app.use('/product',EmployeeRoute);
 app.use('/cart',CartRoute)
-
+app.get(
+    "/auth/google",
+    passport.authenticate("google", { scope: ["profile", "email"] })
+  );
+  
+app.get(
+    "/auth/google/callback",
+    passport.authenticate("google", {
+      failureRedirect: "/login",
+      session: false,
+    }),
+  
+    function (req, res) {
+      // Successful authentication, redirect home.
+      const token = req.token;
+      res.cookie("token", token, {
+        httpOnly: false,
+        sameSite: "lax",
+      });
+      res.redirect(`http://localhost:3000`);
+    }
+  );
 
 app.listen(process.env.PORT,async ()=>{
     try {
