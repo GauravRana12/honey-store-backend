@@ -31,7 +31,6 @@ app.get(
     }),
   
     function (req, res) {
-      // Successful authentication, redirect home.
       const token = req.token;
       res.cookie("token", token, {
         httpOnly: false,
