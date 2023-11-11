@@ -9,7 +9,7 @@ const CartRoute = require('./Routes/CartRoute');
 const passport=require('./config/google.oauth')
 const app=express();
 app.use(cors({
-    origin : ["http://localhost:3000","https://letitbee-b1x4fvqrp-gauravrana12.vercel.app"],
+    origin : ["http://localhost:3000","https://letitbee-q33svjs7y-gauravrana12.vercel.app"],
     credentials: true
 }))
 app.use(express.json());
@@ -37,7 +37,7 @@ app.get(
         httpOnly: false,
         sameSite: "lax",
       });
-      res.redirect(`https://letitbee-b1x4fvqrp-gauravrana12.vercel.app`);
+      res.redirect(`https://letitbee-q33svjs7y-gauravrana12.vercel.app`);
     }
   );
 
