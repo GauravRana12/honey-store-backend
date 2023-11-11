@@ -9,7 +9,7 @@ const CartRoute = require('./Routes/CartRoute');
 const passport=require('./config/google.oauth')
 const app=express();
 app.use(cors({
-    origin : ["http://localhost:3000"]
+    origin : ["http://localhost:3000","https://letitbee-l5emthg3f-gauravrana12.vercel.app"]
 }))
 app.use(express.json());
 app.get('/',(req,res)=>{
@@ -36,7 +36,7 @@ app.get(
         httpOnly: false,
         sameSite: "lax",
       });
-      res.redirect(`http://localhost:3000`);
+      res.redirect(`https://letitbee-l5emthg3f-gauravrana12.vercel.app`);
     }
   );
 
