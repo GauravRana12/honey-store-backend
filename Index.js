@@ -9,7 +9,8 @@ const CartRoute = require('./Routes/CartRoute');
 const passport=require('./config/google.oauth')
 const app=express();
 app.use(cors({
-    origin : ["http://localhost:3000","https://letitbee-l5emthg3f-gauravrana12.vercel.app"]
+    origin : ["http://localhost:3000","https://letitbee-l5emthg3f-gauravrana12.vercel.app"],
+    credentials: true
 }))
 app.use(express.json());
 app.get('/',(req,res)=>{
