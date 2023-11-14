@@ -9,7 +9,7 @@ const CartRoute = require('./Routes/CartRoute');
 const passport=require('./config/google.oauth')
 const app=express();
 app.use(cors({
-    origin : ["http://localhost:3000","https://let-it-bee-co-honey-store-website-ooghkee4d-gauravrana12.vercel.app"],
+    origin : ["http://localhost:3000","https://let-it-bee-co-honey-store-website-gjxenq3f0-gauravrana12.vercel.app"],
     credentials: true
 }))
 app.use(express.json());
@@ -35,9 +35,9 @@ app.get(
       const token = req.token;
       res.cookie("token", token, {
         httpOnly: false,
-        sameSite: "lax",
+        sameSite: "lax"
       });
-      res.redirect(`https://let-it-bee-co-honey-store-website-ooghkee4d-gauravrana12.vercel.app`);
+      res.redirect(`https://let-it-bee-co-honey-store-website-gjxenq3f0-gauravrana12.vercel.app?token=${token}`);
     }
   );
 
