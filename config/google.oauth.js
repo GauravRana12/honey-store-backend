@@ -11,7 +11,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "https://graceful-moth-scarf.cyclic.app/auth/google/callback",
+      callbackURL: "http://localhost:8080/auth/google/callback",
       passReqToCallback: true,
     },
     async function (req, accessToken, refreshToken, profile, cb) {
@@ -29,11 +29,11 @@ passport.use(
         });
         await user.save();
         console.log(user);
-        const token = jwt.sign({ userId: user._id }, "secretkey");
+        const token = jwt.sign({ userID: user._id }, "secret");
         req.token = token;
         return cb(null, user);
       }
-      const token = jwt.sign({ userId: mongooseUser._id }, "secretkey");
+      const token = jwt.sign({ userID: mongooseUser._id }, "secret");
       req.token = token;
       return cb(null, mongooseUser);
     }

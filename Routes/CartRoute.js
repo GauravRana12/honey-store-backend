@@ -22,8 +22,8 @@ CartRoute.get('/',Authenticate,async (req,res)=>{
 CartRoute.post('/',Authenticate,async (req,res)=>{
     const input=req.body;
         const id=req.userID;
-        console.log(input)
-        console.log(id)
+        console.log("input",input)
+        console.log("userID",id)
       try {
         
         const new_obj={
@@ -49,11 +49,21 @@ CartRoute.patch('/:emp_id',Authenticate,async (req,res)=>{
     }
 })
 
-CartRoute.delete('/:emp_id',Authenticate,async (req,res)=>{
+CartRoute.delete('/single/:emp_id',Authenticate,async (req,res)=>{
     try {
         const {emp_id}=req.params;
         await cartModel.findByIdAndDelete(emp_id);
         res.send('deleted successfully')
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+CartRoute.delete('/empty',Authenticate,async (req,res)=>{
+    try {
+        const userID=req.userID;
+        await cartModel.deleteMany({authorID:userID});
+        res.send('cart is empty')
     } catch (error) {
         console.log(error);
     }
