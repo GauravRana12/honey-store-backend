@@ -5,7 +5,7 @@ const Authenticate=(req,res,next)=>{
     console.log("auth",token);
     jwt.verify(token,'secret',async function(err,decode){
         if (err) {
-            console.log(err);
+            console.log("error",err);
             return res.status(400).send("Please Login First");
         }
         else{
