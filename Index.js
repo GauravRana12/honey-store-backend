@@ -9,7 +9,7 @@ const CartRoute = require('./Routes/CartRoute');
 const passport=require('./config/google.oauth')
 const app=express();
 app.use(cors({
-    origin : ["http://localhost:3000","https://let-it-bee.netlify.app"],
+    origin : ["http://localhost:3000","https://let-it-bee-co-honey-store-website.vercel.app"],
     credentials: true
 }))
 app.use(express.json());
@@ -37,7 +37,7 @@ app.get(
         httpOnly: false,
         sameSite: "lax"
       });
-      res.redirect(`https://let-it-bee.netlify.app?token=${token}`);
+      res.redirect(`https://let-it-bee-co-honey-store-website.vercel.app?token=${token}`);
     }
   );
 
